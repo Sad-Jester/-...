@@ -1,0 +1,225 @@
+<!-- public/projects.html -->
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/projects.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="nav-menu">
+                <div class="logo-area"><span>Мой проект</span></div>
+                    <div class="nav-links">
+                        <a href="/profile" class="nav-item"><span>Личный кабинет</span></a>
+                        <a href="/projects" class="nav-item active"><span>Проекты</span></a>
+                        <div class="nav-item-dropdown admin-only" id="dropdownBtn">
+                            <span>Справочники ▼</span>
+                            <div class="dropdown-content" id="dropdownContent">
+                                <a href="/programms">Программы</a>
+                                <a href="/schools">Школы</a>
+                            </div>
+                        </div>
+                        <a href="/users" class="nav-item admin-only" id="users-link"><span>Пользователи</span></a>
+                        <button class="logout-btn-menu" id="logout-btn-menu"><span>Выйти</span></button>
+                    </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="projects-container">
+            <div class="projects-header">
+                <h3>Список проектов</h3>
+                <div class="header-buttons">
+                    <button class="export-btn" id="export-projects-btn" style="display: none;">Экспорт</button>
+                    <button class="add-btn" id="add-project-btn">Добавить проект</button>
+                </div>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="table-wrapper">
+                <table class="projects-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30px;"></th>
+                            <th>Название</th>
+                            <th>Комментарий</th>
+                            <th>Владелец</th>
+                            <th>Дата создания</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-table-body">
+                        <tr>
+                            <td colspan="7" class="loading">Загрузка...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="pagination" class="pagination-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно для создания/редактирования проекта -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-button">&times;</span>
+            <div class="modal-icon"></div>
+            <h3 class="modal-title" id="modal-title">Добавление проекта</h3>
+            <p class="modal-subtitle" id="modal-subtitle">Заполните информацию о проекте</p>
+
+            <div id="modal-error" class="error-message" style="display: none;"></div>
+
+            <form id="project-form" novalidate>
+                <input type="hidden" id="project-id">
+
+                <div class="form-group">
+                    <label for="project-name" id="project-name-label">Название проекта <span class="required">*</span></label>
+                    <input type="text" id="project-name" name="name" placeholder="Введите название проекта">
+                    <div id="name-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-comment">Комментарий</label>
+                    <textarea id="project-comment" name="comment" rows="3" placeholder="Введите комментарий к проекту (необязательно)"></textarea>
+                    <div id="comment-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Программы</label>
+                    <div id="programs-list" style="max-height: 300px; overflow-y: auto; border: 1px solid #e8e0d5; border-radius: 10px; padding: 10px;">
+                        <div style="text-align: center; color: #b0a89d; padding: 20px;">Загрузка программ...</div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Сохранить</button>
+                    <button type="button" class="cancel-btn" id="cancel-modal-btn">Отменить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для выбора сотрудника -->
+    <div id="employee-select-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-button">&times;</span>
+            <div class="modal-icon">
+            </div>
+            <h3 class="modal-title">Выбор сотрудника</h3>
+            <p class="modal-subtitle">Выберите сотрудника для назначения</p>
+
+            <div id="employees-list-container" style="max-height: 400px; overflow-y: auto;">
+                <div style="text-align: center; color: #b0a89d; padding: 20px;">Загрузка...</div>
+            </div>
+
+            <div class="form-actions" style="margin-top: 20px;">
+                <button type="button" class="save-btn" id="save-employee-btn">Сохранить</button>
+                <button type="button" class="cancel-btn" id="cancel-employee-btn">Отменить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения удаления -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <span class="close-button">&times;</span>
+            <div class="modal-icon"></div>
+            <h3 class="modal-title">Подтверждение удаления</h3>
+            <p class="modal-subtitle">Вы уверены, что хотите удалить этот проект? Это действие нельзя отменить.</p>
+
+            <div class="form-actions">
+                <button id="confirm-delete-btn" class="save-btn" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">Удалить</button>
+                <button id="cancel-delete-btn" class="cancel-btn">Отменить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для редактирования записи -->
+    <div id="edit-record-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-button">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-edit"></i>
+            </div>
+            <h3 class="modal-title">Редактирование записи</h3>
+            <p class="modal-subtitle" id="edit-record-school-name">Школа: </p>
+
+            <div id="edit-record-error" class="error-message" style="display: none;"></div>
+
+            <form id="edit-record-form" novalidate>
+                <input type="hidden" id="edit-record-id">
+                <input type="hidden" id="edit-program-id">
+                <input type="hidden" id="edit-school-id">
+
+                <div class="form-group">
+                    <label for="edit-class">Класс</label>
+                    <input type="text" id="edit-class" name="class" placeholder="Введите класс (например: 11А)">
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-group-code">Код группы</label>
+                    <input type="text" id="edit-group-code" name="group_code" placeholder="Введите код группы">
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-link">Ссылка</label>
+                    <input type="url" id="edit-link" name="link" placeholder="https://...">
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-start-date">Дата начала</label>
+                    <input type="date" id="edit-start-date" name="start_date">
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-end-date">Дата окончания</label>
+                    <input type="date" id="edit-end-date" name="end_date">
+                </div>
+
+                <div class="form-group">
+                    <label>Сотрудник</label>
+                    <div id="edit-employees-list" style="max-height: 200px; overflow-y: auto; border: 1px solid #e8e0d5; border-radius: 10px; padding: 10px;">
+                        <div style="text-align: center; color: #b0a89d; padding: 20px;">Загрузка сотрудников...</div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Сохранить</button>
+                    <button type="button" class="cancel-btn" id="cancel-edit-record-btn">Отменить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Тестовый проект</h4>
+                <p>Веб-приложение для демонстрации навыков разработки</p>
+            </div>
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>test@example.com</p>
+                <p>github.com/alexcrim</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Мой тестовый проект</p>
+        </div>
+    </footer>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/projects.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,481 @@
+/* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
+.database-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    flex: 1;
+    min-height: 100vh;
+}
+
+.database-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8e0d5;
+}
+
+.database-header h3 {
+    margin: 0;
+    color: #3d3a35;
+    font-size: 18px;
+}
+
+.add-btn {
+    background-color: #8b7355;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    /*box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);*/
+    background-color: #8b7355;
+}
+
+/* ========== ТАБЛИЦА ========== */
+.table-wrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    overflow-y: visible;
+    border: 1px solid #e8e0d5;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    min-width: 900px;
+}
+
+.users-table thead {
+    background-color: #c4a27a;
+    color: white;
+}
+
+.users-table th, .users-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e8e0d5;
+    vertical-align: middle;
+}
+
+.users-table th {
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.users-table td {
+    font-size: 13px;
+    word-break: break-word;
+    max-width: 200px;
+}
+
+.users-table tbody tr:hover {
+    background: #faf8f5;
+}
+
+.users-table .loading {
+    text-align: center;
+    color: #b0a89d;
+    padding: 40px;
+}
+
+/* ========== КНОПКИ ДЕЙСТВИЙ ========== */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #3d3a35;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* ========== СООБЩЕНИЯ ========== */
+.message {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ========== МОДАЛЬНЫЕ ОКНА ========== */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.form-group input:disabled {
+    background-color: #f5f2ed;
+    color: #b0a89d;
+    cursor: not-allowed;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.save-btn, .cancel-btn {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.save-btn {
+    background-color: #8b7355;
+    color: white;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    /*box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);*/
+    background-color: #8b7355;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.success-message {
+    color: #28a745;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.required {
+    color: #dc3545;
+}
+
+/* ========== TOGGLE SWITCH ========== */
+.toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.toggle-text {
+    font-weight: 500;
+    color: #5c4a3a;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e8e0d5;
+    transition: 0.3s;
+    border-radius: 20px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background-color: #8b7355;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(24px);
+}
+
+.toggle-switch input:disabled + .toggle-slider {
+    background-color: #f5f2ed;
+    cursor: not-allowed;
+}
+
+.toggle-switch input:disabled + .toggle-slider:before {
+    background-color: #b0a89d;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e8e0d5;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #c4a27a;
+    box-shadow: 0 0 0 3px rgba(196, 162, 122, 0.1);
+}
+
+.form-control:disabled {
+    background-color: #f5f2ed;
+    color: #b0a89d;
+    cursor: not-allowed;
+}
+
+.role-employeer {
+    background-color: #17a2b8;
+    color: white;
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+@media (max-width: 768px) {
+    .database-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .database-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .users-table th,
+    .users-table td {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .edit-btn, .delete-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+
+    .status-badge, .role-badge {
+        padding: 3px 8px;
+        font-size: 10px;
+    }
+}
+
+/* Пагинация */
+.pagination-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+.page-btn {
+    background-color: #c4a27a;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 162, 122, 0.3);
+    background-color: #b08d64;
+}
+
+.page-info {
+    color: #3d3a35;
+    font-weight: 500;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.role-admin {
+    background-color: #dc3545;
+    color: white;
+}
+
+.role-user {
+    background-color: #28a745;
+    color: white;
+}
+
+.optional {
+    color: #6c757d;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+/* ========== СТАТУСЫ ========== */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-active {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-inactive {
+    background-color: #6c757d;
+    color: white;
+}
+
+.inactive-user {
+    opacity: 0.7;
+    background-color: rgba(108, 117, 125, 0.05);
+}
+
+.inactive-user:hover {
+    opacity: 0.85;
+    background-color: rgba(108, 117, 125, 0.1);
+}
+
+/* Чек-бокс активности */
+.active-checkbox {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.form-group label span {
+    vertical-align: middle;
+}

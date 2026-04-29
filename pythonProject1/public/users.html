@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пользователи</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/users.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="nav-menu">
+                <div class="logo-area"><span>Мой проект</span></div>
+                    <div class="nav-links">
+                        <a href="/profile" class="nav-item"><span>Личный кабинет</span></a>
+                        <a href="/projects" class="nav-item"><span>Проекты</span></a>
+                        <div class="nav-item-dropdown" id="dropdownBtn">
+                            <span>Справочники ▼</span>
+                            <div class="dropdown-content" id="dropdownContent">
+                                <a href="/programms">Программы</a>
+                                <a href="/schools">Школы</a>
+                            </div>
+                        </div>
+                        <a href="/users" class="nav-item active" id="users-link"><span>Пользователи</span></a>
+                        <button class="logout-btn-menu" id="logout-btn-menu"><span>Выйти</span></button>
+                    </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="database-container">
+            <div class="database-header">
+                <h3>Список пользователей</h3>
+                <button class="add-btn" id="add-user-btn">Добавить пользователя</button>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="table-wrapper">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Фамилия</th>
+                            <th>Имя</th>
+                            <th>Отчество</th>
+                            <th>Логин</th>
+                            <th>Email</th>
+                            <th>Роль</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <tr>
+                            <td colspan="9" class="loading">Загрузка...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="pagination" class="pagination-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно для добавления пользователя -->
+    <div id="add-user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <h3 class="modal-title">Добавление пользователя</h3>
+            <p class="modal-subtitle">Заполните информацию о пользователе</p>
+
+            <div id="modal-error" class="error-message" style="display: none;"></div>
+
+            <form id="add-user-form" novalidate>
+                <div class="form-group">
+                    <label for="user-login">Логин <span class="required">*</span></label>
+                    <input type="text" id="user-login" name="login" placeholder="Введите логин">
+                    <div id="add-login-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-surname">Фамилия <span class="required">*</span></label>
+                    <input type="text" id="user-surname" name="surname" placeholder="Введите фамилию">
+                    <div id="add-surname-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-name">Имя <span class="required">*</span></label>
+                    <input type="text" id="user-name" name="name" placeholder="Введите имя">
+                    <div id="add-name-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-patronymic">Отчество</label>
+                    <input type="text" id="user-patronymic" name="patronymic" placeholder="Введите отчество">
+                </div>
+
+                <div class="form-group">
+                    <label for="user-email">Email <span class="required">*</span></label>
+                    <input type="email" id="user-email" name="email" placeholder="user@example.com">
+                    <div id="add-email-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-password">Пароль <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="user-password" name="password" placeholder="Введите пароль">
+                    </div>
+                    <div id="add-password-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-confirm-password">Повторите пароль <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="user-confirm-password" name="confirmPassword" placeholder="Подтвердите пароль">
+                    </div>
+                    <div id="add-confirm-password-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Сохранить</button>
+                    <button type="button" class="cancel-btn" id="cancel-modal-btn">Отменить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для редактирования пользователя -->
+    <div id="edit-user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-user-edit"></i>
+            </div>
+            <h3 class="modal-title">Редактирование пользователя</h3>
+            <p class="modal-subtitle">Измените информацию о пользователе</p>
+
+            <div id="edit-modal-error" class="error-message" style="display: none;"></div>
+
+            <form id="edit-user-form" novalidate>
+                <input type="hidden" id="edit-user-id">
+
+                <div class="form-group">
+                    <label for="edit-user-login">Логин</label>
+                    <input type="text" id="edit-user-login" name="login" placeholder="Введите логин" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-user-surname">Фамилия <span class="required">*</span></label>
+                    <input type="text" id="edit-user-surname" name="surname" placeholder="Введите фамилию">
+                    <div id="edit-surname-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-user-name">Имя <span class="required">*</span></label>
+                    <input type="text" id="edit-user-name" name="name" placeholder="Введите имя">
+                    <div id="edit-name-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-user-patronymic">Отчество</label>
+                    <input type="text" id="edit-user-patronymic" name="patronymic" placeholder="Введите отчество">
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-user-email">Email <span class="required">*</span></label>
+                    <input type="email" id="edit-user-email" name="email" placeholder="user@example.com">
+                    <div id="edit-email-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-user-password">Пароль <span class="optional">(оставьте пустым, чтобы не менять)</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="edit-user-password" name="password" placeholder="Введите новый пароль">
+                    </div>
+                    <div id="edit-password-error" class="field-error" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-user-role">Роль</label>
+                    <select id="edit-user-role" class="form-control">
+                        <option value="employeer">Сотрудник</option>
+                        <option value="admin">Администратор</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="toggle-label">
+                        <span class="toggle-text">Аккаунт активен</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="edit-user-active">
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Сохранить</button>
+                    <button type="button" class="cancel-btn" id="cancel-edit-modal-btn">Отменить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Оформленный футер -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Тестовый проект</h4>
+                <p>Веб-приложение для демонстрации навыков разработки</p>
+            </div>
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>test@example.com</p>
+                <p>github.com/alexcrim</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Мой тестовый проект</p>
+        </div>
+    </footer>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/users.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,203 @@
+/* ========== ПРОФИЛЬ ========== */
+.profile-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    gap: 30px;
+    flex: 1;
+}
+
+.profile-sidebar {
+    flex: 1;
+    background: white;
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    height: fit-content;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8e0d5;
+}
+
+.avatar {
+    margin-bottom: 20px;
+}
+
+.avatar-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: #c4a27a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(196, 162, 122, 0.2);
+}
+
+.avatar-placeholder span {
+    font-size: 48px;
+    color: white;
+    font-weight: bold;
+}
+
+.user-short-info h3 {
+    margin: 15px 0 5px;
+    color: #3d3a35;
+}
+
+.user-short-info p {
+    color: #7a6b5d;
+    margin: 0;
+}
+
+.profile-content {
+    flex: 3;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8e0d5;
+}
+
+.profile-form {
+    margin-bottom: 30px;
+}
+
+.form-group input:disabled {
+    background-color: #f5f2ed;
+    color: #b0a89d;
+    cursor: not-allowed;
+}
+
+/* Ошибки валидации */
+.form-group input.error {
+    border-color: #dc3545;
+}
+
+.form-group input.error:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.field-error {
+    font-size: 12px;
+    color: #dc3545;
+    margin-top: 5px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.save-btn,
+.cancel-btn,
+.change-password-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.save-btn,
+.change-password-btn {
+    background-color: #8b7355;
+    color: white;
+}
+
+.save-btn:hover,
+.change-password-btn:hover {
+    transform: translateY(-2px);
+/*    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);*/
+    background-color: #8b7355;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.change-password-section {
+    border-top: 1px solid #e8e0d5;
+    padding-top: 30px;
+    margin-top: 30px;
+}
+
+/* Сообщения */
+.message {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.required {
+    color: #dc3545;
+}
+
+.optional {
+    color: #b0a89d;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+/* Password wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+@media (max-width: 768px) {
+
+    /* Профиль */
+    .profile-container {
+        flex-direction: column;
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .profile-sidebar {
+        margin-bottom: 20px;
+    }
+}

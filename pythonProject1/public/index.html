@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой тестовый проект</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/auth-page.css">
+</head>
+
+<body>
+
+<!-- Герой-секция -->
+    <div class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1><span class="gradient-text">Название проекта</span></h1>
+            <p>Описание проекта</p>
+
+            <!-- Блок для авторизованного пользователя -->
+            <div id="user-info" style="display: none;">
+                <div class="user-greeting">
+                    <p style="color: #8b7355; font-size: 18px; margin-bottom: 20px;">
+                        Добро пожаловать, <strong id="user-full-name"></strong>!
+                    </p>
+                </div>
+                <div class="hero-buttons">
+                    <a href="/profile" class="btn-primary">Перейти в профиль</a>
+                    <button id="logout-btn-index" class="btn-logout-index">Выйти</button>
+                </div>
+            </div>
+
+            <!-- Блок для неавторизованного пользователя - форма авторизации прямо на странице -->
+            <div id="unauth-info">
+                <div class="auth-section">
+                    <h2>Вход в систему</h2>
+
+                    <div id="auth-error" class="error-message" style="display: none;"></div>
+
+                    <div class="form-group">
+                        <label>Логин</label>
+                        <input id="auth-login" type="text" placeholder="Введите логин" />
+                        <div id="login-field-error" class="field-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <div class="password-wrapper">
+                            <input id="auth-password" type="password" placeholder="Введите пароль" />
+                        </div>
+                        <div id="password-field-error" class="field-error"></div>
+                    </div>
+
+                    <div class="remember">
+                        <input type="checkbox" id="remember-me" />
+                        <label for="remember-me">Запомнить меня</label>
+                    </div>
+
+                    <button class="auth-button" id="auth-submit">Войти</button>
+
+                    <div class="forgot-link">
+                        <a href="#">Забыли пароль?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Оформленный футер -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Тестовый проект</h4>
+                <p>Веб-приложение для демонстрации навыков разработки</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>test@example.com</p>
+                <p>github.com/alexcrim</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Мой тестовый проект</p>
+        </div>
+    </footer>
+
+<!-- Подключение внешних скриптов -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/script.js"></script>
+
+</body>
+</html>

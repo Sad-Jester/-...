@@ -1,0 +1,735 @@
+/* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
+.programms-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    flex: 1;
+    min-height: 100vh;
+}
+
+.programms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8e0d5;
+}
+
+.programms-header h3 {
+    margin: 0;
+    color: #3d3a35;
+    font-size: 18px;
+}
+
+.add-btn {
+    background-color: #8b7355;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    background-color: #7a6248;
+}
+
+/* ========== ТАБЛИЦА ========== */
+.table-wrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    border: 1px solid #e8e0d5;
+}
+
+.programms-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    min-width: 800px;
+}
+
+.programms-table thead {
+    background-color: #c4a27a;
+    color: white;
+}
+
+.programms-table th, .programms-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e8e0d5;
+    vertical-align: middle;
+}
+
+.programms-table th {
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.programms-table td {
+    font-size: 13px;
+    word-break: break-word;
+    max-width: 300px;
+}
+
+.programms-table tbody tr:hover {
+    background: #faf8f5;
+}
+
+.programms-table .loading {
+    text-align: center;
+    color: #b0a89d;
+    padding: 40px;
+}
+
+.year-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: #e8e0d5;
+    color: #5c4a3a;
+}
+
+/* ========== КНОПКИ ДЕЙСТВИЙ ========== */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #3d3a35;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* ========== СООБЩЕНИЯ ========== */
+.message {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ========== МОДАЛЬНЫЕ ОКНА ========== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    margin: 20px auto;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.modal-icon {
+    text-align: center;
+    font-size: 60px;
+    color: #8b7355;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #3d3a35;
+}
+
+.modal-subtitle {
+    text-align: center;
+    color: #7a6b5d;
+    margin-bottom: 30px;
+}
+
+.close-button {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #b0a89d;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    color: #5c4a3a;
+    transform: rotate(90deg);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #5c4a3a;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e8e0d5;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #c4a27a;
+    box-shadow: 0 0 0 3px rgba(196, 162, 122, 0.1);
+}
+
+.form-group input.error {
+    border-color: #dc3545;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.save-btn, .cancel-btn {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.save-btn {
+    background-color: #8b7355;
+    color: white;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    background-color: #7a6248;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.field-error {
+    font-size: 12px;
+    color: #dc3545;
+    margin-top: 5px;
+    animation: fadeIn 0.3s ease;
+    display: none;
+}
+
+.required {
+    color: #dc3545;
+}
+
+/* ========== ПАГИНАЦИЯ ========== */
+.pagination-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+.page-btn {
+    background-color: #c4a27a;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 162, 122, 0.3);
+    background-color: #b08d64;
+}
+
+.page-info {
+    color: #3d3a35;
+    font-weight: 500;
+}
+
+.expand-icon {
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    text-align: center;
+    transition: transform 0.2s ease;
+    color: #8b7355;
+    font-size: 12px;
+}
+
+.expand-icon:hover {
+    color: #5c4a3a;
+}
+
+.expand-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.details-cell {
+    padding: 20px !important;
+}
+
+.program-card {
+    background: white;
+    border: 1px solid #e8e0d5;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.program-card:last-child {
+    margin-bottom: 0;
+}
+
+.program-header {
+    background-color: #c4a27a;
+    color: white;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+
+.program-header i {
+    margin-right: 8px;
+}
+
+.program-body {
+    padding: 15px;
+}
+
+.employee-item {
+    border-bottom: 1px solid #f0ece6;
+    padding: 10px 0;
+}
+
+.employee-item:last-child {
+    border-bottom: none;
+}
+
+.school-item {
+    margin-left: 44px;
+    padding: 5px 0 5px 15px;
+    border-left: 2px solid #e8e0d5;
+}
+
+.details-row {
+    display: none;
+    background-color: #faf8f5;
+}
+
+.details-row.show {
+    display: table-row;
+}
+
+.details-cell {
+    padding: 20px !important;
+}
+
+.employee-card {
+    background: white;
+    border: 1px solid #e8e0d5;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.employee-card:last-child {
+    margin-bottom: 0;
+}
+
+.employee-header {
+    background-color: #c4a27a;
+    color: white;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+
+.employee-header i {
+    margin-right: 8px;
+}
+
+.employee-body {
+    padding: 15px;
+}
+
+.school-item {
+    margin-left: 20px;
+    padding: 5px 0 5px 15px;
+    border-left: 2px solid #e8e0d5;
+}
+
+.school-card {
+    background: white;
+    border: 1px solid #e8e0d5;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.school-card:last-child {
+    margin-bottom: 0;
+}
+
+.school-header {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+
+.school-header i {
+    margin-right: 8px;
+}
+
+.school-body {
+    padding: 15px;
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+@media (max-width: 768px) {
+    .programms-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .programms-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .programms-table th,
+    .programms-table td {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.template-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.template-btn:hover {
+    transform: translateY(-2px);
+    background-color: #5a6268;
+}
+
+.import-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.import-btn:hover {
+    transform: translateY(-2px);
+    background-color: #218838;
+}
+
+.export-btn {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.export-btn:hover {
+    transform: translateY(-2px);
+    background-color: #138496;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .programms-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .template-btn, .import-btn, .export-btn, .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.expand-all-icon {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s ease;
+    color: white;
+    font-size: 12px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.expand-all-icon:hover {
+    opacity: 0.8;
+}
+
+.expand-all-icon.expanded {
+    transform: rotate(90deg);
+}
+
+/* Стили для иконок раскрытия в строках */
+.programms-table .expand-icon {
+    cursor: pointer;
+    display: inline-block;
+    width: 24px;
+    text-align: center;
+    transition: transform 0.2s ease;
+    color: #8b7355;
+    font-size: 12px;
+}
+
+.programms-table .expand-icon:hover {
+    color: #5c4a3a;
+}
+
+.programms-table .expand-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.programms-table th:first-child {
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+}
+
+/* Адаптивность для таблицы на странице программ */
+@media (max-width: 768px) {
+    .programms-table .details-cell table,
+    .programms-table .details-cell thead,
+    .programms-table .details-cell tbody,
+    .programms-table .details-cell tr,
+    .programms-table .details-cell td {
+        display: block;
+    }
+
+    .programms-table .details-cell thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .programms-table .details-cell tr {
+        border: 1px solid #e8e0d5;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .programms-table .details-cell td {
+        border: none;
+        border-bottom: 1px solid #e8e0d5;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+    }
+
+    .programms-table .details-cell td:before {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: 600;
+        color: #5c4a3a;
+    }
+
+    .programms-table .details-cell td:nth-of-type(1):before { content: "Школа"; }
+    .programms-table .details-cell td:nth-of-type(2):before { content: "Комментарий к школе"; }
+    .programms-table .details-cell td:nth-of-type(3):before { content: "Сотрудники"; }
+}
